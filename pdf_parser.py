@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 
 from PyPDF2 import PdfFileWriter, PdfFileReader
+import sys
 
-pdf = PdfFileReader(open("test.pdf", "rb"))
-
+file_name = str(sys.argv[1])
+pattern =  str(sys.argv[2])
+pdf = PdfFileReader(open(file_name, "rb"))
 
 for pageNum in range(0, pdf.numPages):
     page = pdf.getPage(pageNum)
-    print(page.extractText())
+    text = page.extractText()
+    print(text.find(pattern))
+    #print(page.extractText())
